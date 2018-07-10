@@ -2,6 +2,7 @@ import spock.lang.Specification
 
 class DataDrivenSpec extends Specification {
 
+//    @Unroll
     def "The numbers should be squared"(int base, int exponent, int ans) {
         expect:
             base ** exponent == ans // Groovy way of saying Math.pow()
