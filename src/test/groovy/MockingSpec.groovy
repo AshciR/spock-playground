@@ -1,6 +1,8 @@
 import io.richie.ContributionService
 import spock.lang.Specification
 
+import java.time.LocalDate
+
 class MockingSpec extends Specification {
 
     def "Should return a status code of 0" (){
@@ -27,19 +29,30 @@ class MockingSpec extends Specification {
         statusCode == 201
     }
 
-    def 'Should return 201 when we make any contribution'(double amount, int statusCode){
+    def 'Should return 204 when we cancel any contribution'(int contributionId, int statusCode){
         given:
         def contributionMock = Mock(ContributionService)
-        contributionMock.makeContribution(_) >> 201
+        contributionMock.cancelContribution(_) >> 204
 
         expect:
-        contributionMock.makeContribution(amount) == statusCode
+        contributionMock.cancelContribution(contributionId) == statusCode
 
         where:
-        amount | statusCode
-        100.00 | 201
-        200.00 | 201
-        300.00 | 201
+        contributionId | statusCode
+        100.00 | 204
+        200.00 | 204
+        300.00 | 204
 
+    }
+
+    def "Should verify setFutureDate method was called"() {
+        given:
+        def contributionMock = Mock(ContributionService)
+
+        when:
+        contributionMock.setFutureDate(1, LocalDate.now()) // TODO: Figure out why it doesn't work with _
+
+        then:
+        1 * contributionMock.setFutureDate(_, _)
     }
 }
