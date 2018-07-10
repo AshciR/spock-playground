@@ -62,6 +62,7 @@
                     <useFile>false</useFile>
                     <includes>
                         <include>**/*Spec.java</include>
+                        <include>**/*Specification.java</include>
                     </includes>
                 </configuration>
             </plugin>
