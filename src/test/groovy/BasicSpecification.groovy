@@ -42,4 +42,15 @@ class BasicSpecification extends Specification {
             list.size() == 4
     }
 
+    def "map should have the correct values when updated"(){
+        given:
+            def map = ["one" : 1, "two" : 2, "three" : 3]
+
+        when:
+            map["one"] = 100
+
+        then:
+            map["one"] == 100
+    }
+
 }
